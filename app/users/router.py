@@ -7,5 +7,5 @@ router = APIRouter(
 )
 
 @router.post("/register")
-def register_user(user_data: SUserRegister):
-    pass
+async def register_user(user_data: SUserRegister):
+    return user_data.password
