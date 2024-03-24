@@ -1,7 +1,8 @@
 from fastapi import APIRouter
 
+from app.exceptions import UserNotExistsException
 from app.users.dao import UsersDAO
-from app.users.schemas import SUser, SUserRegister, SUserText
+from app.users.schemas import SUserRegister, SUserText
 
 router = APIRouter(
     tags=["Пользователь"]
@@ -20,3 +21,10 @@ async def write_data(user_data: SUserText):
     await UsersDAO.update_data(username=username,
                        textdata=user_data.textdata)
     return username, user_data.textdata
+
+@router.get("/get_data/{username}")
+async def wrget_dataite_data(username: str):
+    user = await UsersDAO.find_one_or_none(username=username)
+    if user:
+        return user.textdata
+    raise UserNotExistsException
