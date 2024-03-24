@@ -15,3 +15,7 @@ class UserAlreadyExistsException(AppException):
 class PasswordEasyException(AppException):
     status_code = status.HTTP_409_CONFLICT
     detail = "Пароль не соответствует требованиям безопасности"
+
+class UserNotExistsException(AppException):
+    status_code = status.HTTP_409_CONFLICT
+    detail = "Пользователь не существует"

@@ -9,4 +9,4 @@ class Users(Base):
     id: Mapped[int] = mapped_column(primary_key=True, nullable=False)
     username: Mapped[str] = mapped_column(VARCHAR(30), nullable=False)
     password: Mapped[str] = mapped_column(VARCHAR(30), nullable=False)
-    textdata: Mapped[Optional[str]] = mapped_column(TEXT)
+    textdata: Mapped[Optional[str]] = mapped_column(TEXT, nullable=True)
