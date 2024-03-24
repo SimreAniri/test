@@ -8,14 +8,6 @@ class SUserRegister(BaseModel):
     username: str
     password: str
 
-    @validator("username")
-    @classmethod
-    async def validate_username(cls, value):
-        existing_user = await UsersDAO.find_one_or_none(username=value)
-        if existing_user:
-            raise UserAlreadyExistsException
-        return value
-
     @validator("password")
     @classmethod
     def validate_password(cls, value):
@@ -23,16 +15,6 @@ class SUserRegister(BaseModel):
             return value
         raise PasswordEasyException
     
-class SUser(BaseModel):
+class SUserText(BaseModel):
     username: str
-
-    @validator("username")
-    @classmethod
-    async def validate_username(cls, value):
-        existing_user = await UsersDAO.find_one_or_none(username=value)
-        if existing_user:
-            return value
-        raise UserNotExistsException
-        
-class SUserText(SUser):
     textdata: str
